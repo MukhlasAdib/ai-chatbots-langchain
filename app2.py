@@ -34,16 +34,21 @@ if os.environ.get("GOOGLE_API_KEY") is None:
         st.stop()
 
 ### Kolom Chat ###
+# Bikin chat history kosong jika belum ada
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
 
+# Tampilkan chat history yang ada selama ini
 for chat in st.session_state["chat_history"]:
     with st.chat_message("User"):
         st.markdown(chat)
 
+# Minta prompt dari user
 user_prompt = st.chat_input("Ask AI")
 if not user_prompt:
     st.stop()
+st.session_state["chat_history"].append(user_prompt)
+
+# Tampilkan prompt dari user
 with st.chat_message("User"):
     st.markdown(user_prompt)
-st.session_state["chat_history"].append(user_prompt)
