@@ -1,3 +1,11 @@
+"""
+Applikasi Python sederhana chatbot dengan gemini.
+Chatbot dibuat melalui interaksi di terminal.
+
+Cara jalankan:
+>>> python app1.py
+"""
+
 import os
 from getpass import getpass
 
