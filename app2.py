@@ -33,6 +33,7 @@ if os.environ.get("GOOGLE_API_KEY") is None:
 
     if is_api_key_submitted and api_key != "":
         os.environ["GOOGLE_API_KEY"] = api_key
+        st.rerun()
     if os.environ.get("GOOGLE_API_KEY") is None:
         st.stop()
 
