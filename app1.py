@@ -7,14 +7,14 @@ Cara jalanin:
 import os
 from getpass import getpass
 
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 
-GOOGLE_API_KEY = getpass("Please enter your Google API Key: ")
-os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
+GROQ_API_KEY = getpass("Please enter your Groq API Key: ")
+os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
 print()
 prompt = input("User: ")
-client = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
+client = ChatGroq(model="openai/gpt-oss-120b")
 response = client.invoke(prompt)
 
 print("AI:", response.content)
