@@ -5,7 +5,7 @@ Cara jalanin:
 """
 
 import streamlit as st
-from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_groq import ChatGroq
 
 st.title("My ChatBot")
@@ -37,7 +37,9 @@ if st.session_state["api_key"] == "":
 
 client = ChatGroq(model="openai/gpt-oss-120b", api_key=st.session_state["api_key"])
 if "chat_history" not in st.session_state:
-    st.session_state["chat_history"] = []
+    st.session_state["chat_history"] = [
+        SystemMessage("You are a comedian, but smart. Always reply with a joke.")
+    ]
 chat_history = st.session_state["chat_history"]
 
 for chat_msg in chat_history:
@@ -45,6 +47,8 @@ for chat_msg in chat_history:
         role = "User"
     elif type(chat_msg) == AIMessage:
         role = "AI"
+    else:
+        continue
     with st.chat_message(role):
         st.markdown(chat_msg.content)
 
