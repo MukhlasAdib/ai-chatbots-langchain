@@ -1,15 +1,20 @@
 """
 Cara jalanin:
 
->>> streamlit run app1.py
+>>> python app1.py
 """
 
-import streamlit as st
+import os
+from getpass import getpass
 
-st.title("Adib App")
-st.markdown("Nama saya Adib")
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-pressed = st.button("Click me")
+GOOGLE_API_KEY = getpass("Please enter your Google API Key: ")
+os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 
-if pressed:
-    st.slider("Umurmu berapa?", min_value=0, max_value=100)
+print()
+prompt = input("User: ")
+client = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
+response = client.invoke(prompt)
+
+print("AI:", response.content)
