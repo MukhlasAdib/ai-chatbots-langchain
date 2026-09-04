@@ -5,6 +5,7 @@ Cara jalanin:
 """
 
 import streamlit as st
+from langchain_groq import ChatGroq
 
 st.title("My ChatBot")
 st.markdown("Hello, this is my AI")
@@ -28,5 +29,9 @@ with col2:
 if is_api_key_submitted:
     st.session_state["api_key"] = input_api_key
 
-st.markdown("API Key: " + st.session_state["api_key"])
-temp_button = st.button("Click me to start")
+if st.session_state["api_key"] == "":
+    st.stop()
+
+client = ChatGroq(model="openai/gpt-oss-120b", api_key=st.session_state["api_key"])
+response = client.invoke("What is AI")
+st.markdown(response.content)
