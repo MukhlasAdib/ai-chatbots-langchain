@@ -20,6 +20,6 @@ while True:
     prompt = input("User: ")
     chat_history.append(HumanMessage(prompt))
     client = ChatGroq(model="openai/gpt-oss-120b")
-    response = client.invoke(prompt)
+    response = client.invoke(chat_history)
     chat_history.append(response)
     print("AI:", response.content)
